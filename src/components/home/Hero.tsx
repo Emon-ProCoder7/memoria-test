@@ -32,19 +32,22 @@ export function Hero() {
   // Preload images
   useEffect(() => {
     const loadImages = async () => {
-      const loadedImages: HTMLImageElement[] = [];
+      const imagePromises: Promise<HTMLImageElement>[] = [];
+      
       // Files are scrollytelling_007.webp to scrollytelling_081.webp
       for (let i = 7; i <= 81; i++) {
-        const img = new Image();
-        const frameNum = i.toString().padStart(3, '0');
-        img.src = `/Images/heroanimation/scrollytelling_${frameNum}.webp`;
-        await new Promise((resolve) => {
-          img.onload = resolve;
-          // Continue even if error to avoid breaking everything
-          img.onerror = resolve; 
+        const promise = new Promise<HTMLImageElement>((resolve) => {
+          const img = new Image();
+          const frameNum = i.toString().padStart(3, '0');
+          img.src = `/Images/heroanimation/scrollytelling_${frameNum}.webp`;
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(img); // Continue even on error
         });
-        loadedImages.push(img);
+        imagePromises.push(promise);
       }
+
+      // Load all images in parallel
+      const loadedImages = await Promise.all(imagePromises);
       setImages(loadedImages);
       setIsLoaded(true);
     };
