@@ -13,8 +13,11 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      // Hero section is approx 400vh tall, so we keep navbar transparent for a good portion of it.
+      // Adjust this multiplier as needed (e.g., 2.5 * window.innerHeight)
+      setIsScrolled(window.scrollY > window.innerHeight * 2.5);
     };
+    handleScroll(); // Check initial state
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
