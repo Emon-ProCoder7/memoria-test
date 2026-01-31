@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    /* Warm Gold & Deep Charcoal Palette - Elegant & Cinematic */
+    
+    /* Background: Deep Charcoal (almost black but richer) */
+    --background: 220 30% 10%;
+    /* Foreground: Off-white cream */
+    --foreground: 40 20% 95%;
+
+    /* Card: Slightly lighter charcoal */
+    --card: 220 25% 14%;
+    --card-foreground: 40 20% 95%;
+ 
+    /* Popover: Same as card */
+    --popover: 220 25% 14%;
+    --popover-foreground: 40 20% 95%;
+ 
+    /* Primary: Rich Gold/Amber */
+    --primary: 35 90% 55%;
+    --primary-foreground: 220 30% 10%;
+    --primary-glow: 35 90% 70%;
+ 
+    /* Secondary: Deep Teal (Complementary) */
+    --secondary: 175 40% 30%;
+    --secondary-foreground: 175 40% 95%;
+ 
+    /* Muted: Soft gray-blue */
+    --muted: 220 20% 25%;
+    --muted-foreground: 220 10% 70%;
+ 
+    /* Accent: Brighter Gold */
+    --accent: 35 90% 60%;
+    --accent-foreground: 220 30% 10%;
+ 
+    /* Destructive: Deep Red */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+ 
+    /* Border: Subtle gray */
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 35 90% 55%;
+
+    /* Custom Radius */
+    --radius: 0.5rem;
+
+    /* Shadow System */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-panel {
+  @apply bg-background/60 backdrop-blur-md border border-white/10;
+}
